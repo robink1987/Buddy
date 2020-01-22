@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="93303450-71bf-4a16-b3a8-d7e7f2dad8da" >
+		<http:listener-connection host="localhost" port="8007" />
+	</http:listener-config>
+	<flow name="uri1Flow" doc:id="70103439-09ce-4e25-8d77-af89df71f962" >
+		<http:listener doc:name="Listener" doc:id="cdeb8ac4-d6ac-46c3-8030-69f1f36033a3" config-ref="HTTP_Listener_config" path="/s/{paul}"/>
+		<set-variable value="#[attributes.uriParams.paul]" doc:name="Set Variable" doc:id="1b178446-b170-4bb0-b218-c976c455a843" variableName="Robin"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c2632a38-4e04-411d-8908-8b7c34d94e58" message="#[vars.Robin]"/>
+		<set-payload value="#[vars.Robin]" doc:name="Set Payload" doc:id="16ad782c-2828-4acb-813e-91a4651195d8" />
+	</flow>
+</mule>
